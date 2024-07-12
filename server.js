@@ -3,13 +3,24 @@ const { checkEmail } = require("./emailValidator");
 const cors = require("cors");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
 	res.status(200).send({ message: "Hello World" });
+});
+
+app.get("/test", async (req, res) => {
+	const email = req.query.email;
+	try {
+		checkEmail(email, result => {
+			if (!res.headersSent) {
+				res.status(200).send({ email, result });
+			}
+		});
+	} catch (error) {}
 });
 
 app.post("/validate-email", (req, res) => {
