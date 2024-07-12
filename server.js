@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 
 app.get("/test", async (req, res) => {
 	const email = req.query.email;
+	console.log({ emailIs: email });
 	try {
 		checkEmail(email, result => {
 			if (!res.headersSent) {
