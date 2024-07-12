@@ -1,11 +1,17 @@
 const express = require("express");
-// const { checkEmail } = require("./emailValidator");
-const { checkEmail } = require("./testing/server2");
+const { checkEmail } = require("./emailValidator");
+const cors = require("cors");
+// const { checkEmail } = require("./testing/server2");
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
+
+app.get("/", () => {
+	res.send("Hello World");
+});
 
 app.post("/validate-email", (req, res) => {
 	const email = req.body.email;
@@ -21,10 +27,6 @@ app.post("/validate-email", (req, res) => {
 			res.send({ email, result });
 		}
 	});
-});
-
-app.get("/", () => {
-	res.send("Hello World");
 });
 
 app.listen(port, () => {
