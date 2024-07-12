@@ -23,6 +23,10 @@ app.post("/validate-email", (req, res) => {
 	});
 });
 
+app.get("/", () => {
+	res.send("Hello World");
+});
+
 app.listen(port, () => {
 	console.log(`Email validation server running at http://localhost:${port}`);
 });
